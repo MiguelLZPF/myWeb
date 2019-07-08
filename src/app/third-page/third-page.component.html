@@ -1,0 +1,22 @@
+<div fxFlex fxLayout="column" fxLayoutGap="10px" style="height:100vh">
+	<div fxLayout="row wrap">
+		<div *ngFor="let card of cards" fxFlex="40" fxFlex.md="40" fxFlex.sm="50" fxFlex.xs="100" fxLayout="column" style="padding: 5px;">
+			<mat-card class="card" gdAreas="header | side | content | footer" gdGap="10px" gdRows="auto auto auto auto">
+				<mat-card-header gdArea="header">
+					<mat-card-title>{{card.getTitle()}}</mat-card-title>
+					<mat-card-subtitle>----</mat-card-subtitle>
+				</mat-card-header>
+				<div gdArea="side">
+					<img mat-card-image class="card-img" src={{card.getContent().getImage()}} >
+			</div>
+      <mat-card-content gdArea="content">
+			 ------
+      </mat-card-content>
+			<mat-card-actions gdArea="footer">
+				<a mat-button color="primary" href=".">Link</a>
+			</mat-card-actions>
+</mat-card>
+
+	</div>
+  </div>
+</div>

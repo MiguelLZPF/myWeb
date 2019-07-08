@@ -1,0 +1,217 @@
+<h1 class="mat-h1">That's Me! </h1>
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle
+  (opened)="panel0OpenState = true" (closed)="panel0OpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title color="primary">
+        <b>Personal data</b>
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-icon>{{panel0OpenState ? 'expand_less' : 'expand_more'}}</mat-icon>
+        <mat-icon color="primary">person</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div
+      gdAreas="side content"
+      gdGap="0px"
+      gdRows="auto"
+      gdCols="stretch"
+      gdAreas.lt-md="side | content"
+      gdRows.lt-md="400px auto">
+      <div gdArea="side">
+        <img mat-card-image class="image-in-grid" src="assets/images/me_g_image_card.jpg">
+      </div>
+      <div gdArea="content">
+          <mat-list>
+              <mat-list-item>
+                <mat-icon>sentiment_satisfied_alt</mat-icon>&nbsp;
+                Name: Miguel Gómez Carpena
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon>smartphone</mat-icon>
+                &nbsp;Phone Number: 644 26 12 36&nbsp;
+                (<mat-icon svgIcon="telegram_icon"></mat-icon>
+                &nbsp; & &nbsp;
+                <mat-icon svgIcon="whatsapp_icon"></mat-icon>)
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon>email</mat-icon>&nbsp;
+                Mail:&nbsp; <a href="mailto:mgcdreamer@gmail.com">mgcdreamer@gmail.com</a>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon>home</mat-icon>&nbsp;
+                Address: Av. Enrique Mowinkel, 39314, Laredo, Cantabria, Spain
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon>directions_car</mat-icon>&nbsp;
+                Mobility: Spanish Driver and Motorbike Licence (B - AM, A1 & A2).
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon>school</mat-icon>&nbsp;
+                Title: Graduated & Master in Telecommunication Engineering
+              </mat-list-item>
+          </mat-list>
+      </div>
+    </div>
+
+    <mat-action-row>
+      <a mat-button href="https://www.linkedin.com/in/miguel-g%C3%B3mez-carpena-a1355a186/"
+      class="mat-button-linkedin" target="_blank"
+      matTooltip="Click to go to my Linkedin Profile"
+      matTooltipPosition="below">
+        <mat-icon svgIcon="linkedin_icon"></mat-icon>
+    </a>
+      <a mat-button href="https://www.infojobs.net/candidate/cv/view/index.xhtml?dgv=3009843565154982047"
+      class="mat-button-infojobs" target="_blank"
+      matTooltip="Click to go to my IJ Profile"
+      matTooltipPosition="below">
+        InfoJobs
+      </a>
+      <a mat-icon-button color="warn"
+      href="https://drive.google.com/open?id=1qFDreO_wrRlJ63tfk9vjMMNpRWsQSdx9"
+      target="_blank"
+      matTooltip="Click to download CV as PDF"
+      matTooltipPosition="below">
+        <mat-icon>picture_as_pdf</mat-icon>
+      </a>
+      <span class="example-spacer"></span>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle
+  (opened)="panel1OpenState = true" (closed)="panel1OpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Experience</b>
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-icon>{{panel1OpenState ? 'expand_less' : 'expand_more'}}</mat-icon>
+        <mat-icon color="primary">work</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <hr>
+
+    <ng-container *ngFor="let exp of experience">
+      <div
+        gdAreas="date title content company"
+        gdGap="10px"
+        gdRows="auto"
+        gdCols="auto auto auto auto"
+        gdAreas.lt-md="date | title | content | company"
+        gdRows.lt-md="auto auto auto auto">
+
+        <div gdArea="date">{{exp.getDate()}}</div>
+        <div gdArea="title"><b>{{exp.getTitle()}}</b></div>
+        <div gdArea="content">{{exp.getContent()}}</div>
+        <div gdArea="company" class="company-name"><b>{{exp.getCompany()}}</b></div>
+
+      </div>
+      <hr>
+   </ng-container>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle
+  (opened)="panel2OpenState = true" (closed)="panel2OpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Education</b>
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-icon>{{panel2OpenState ? 'expand_less' : 'expand_more'}}</mat-icon>
+        <mat-icon color="primary">school</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <hr>
+
+    <ng-container *ngFor="let edu of education">
+      <div
+        gdAreas="date title content company"
+        gdGap="10px"
+        gdRows="auto"
+        gdCols="auto auto auto auto"
+        fxLayoutAlign="left"
+        gdAreas.lt-md="date | title | company"
+        gdRows.lt-md="auto auto auto auto">
+
+        <div gdArea="date">{{edu.getDate()}}</div>
+        <div gdArea="title"><b>{{edu.getTitle()}}</b></div>
+        <div gdArea="company" class="company-name"><b>{{edu.getCompany()}}</b></div>
+
+      </div>
+      <hr>
+   </ng-container>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle
+  (opened)="panel3OpenState = true" (closed)="panel3OpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Certifications</b>
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-icon>{{panel3OpenState ? 'expand_less' : 'expand_more'}}</mat-icon>
+        <mat-icon color="primary">done_all</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <hr>
+
+    <ng-container *ngFor="let cer of cert">
+      <div
+        gdAreas="date title content company"
+        gdGap="10px"
+        gdRows="auto"
+        gdCols="auto auto auto auto"
+        fxLayoutAlign="left"
+        gdAreas.lt-md="date | title | company"
+        gdRows.lt-md="auto auto auto auto">
+
+        <div gdArea="date">{{cer.getDate()}}</div>
+        <div gdArea="title"><b>{{cer.getTitle()}}</b></div>
+        <div gdArea="company" class="company-name"><b>{{cer.getCompany()}}</b></div>
+
+      </div>
+      <hr>
+   </ng-container>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle
+  (opened)="panel4OpenState = true" (closed)="panel4OpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>SD Languajes</b>
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-icon>{{panel4OpenState ? 'expand_less' : 'expand_more'}}</mat-icon>
+        <mat-icon color="primary">code</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    in development... sorry :-)
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+      <button mat-button color="primary" (click)="nextStep()">End</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>

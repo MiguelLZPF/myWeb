@@ -1,0 +1,7 @@
+.me-g-image-card {
+    max-width: 90%;
+  }
+  .example-header-image {
+    background-image: "asserts/images/me_image";
+    background-size: cover;
+  }
