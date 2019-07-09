@@ -25,9 +25,11 @@ import { ThirdPageComponent } from './third-page/third-page.component';
 import { AccordionCVComponent } from './accordion-cv/accordion-cv.component';
 
 const appRoutes: Routes = [
-  { path: 'first-page', component: FirstPageComponent },
-  { path: 'second-page', component: SecondPageComponent },
-  { path: 'third-page', component: ThirdPageComponent }
+  { path: 'myWeb/', component: FirstPageComponent },
+  { path: 'myWeb', component: FirstPageComponent },
+  { path: 'myWeb/first-page', component: FirstPageComponent },
+  { path: 'myWeb/second-page', component: SecondPageComponent },
+  { path: 'myWeb/third-page', component: ThirdPageComponent }
 ];
 
 @NgModule({
