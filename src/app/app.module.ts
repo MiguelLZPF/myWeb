@@ -25,7 +25,6 @@ import { ThirdPageComponent } from './third-page/third-page.component';
 import { AccordionCVComponent } from './accordion-cv/accordion-cv.component';
 
 const appRoutes: Routes = [
-  { path: '/', component: FirstPageComponent },
   { path: '', component: FirstPageComponent },
   { path: 'first-page', component: FirstPageComponent },
   { path: 'second-page', component: SecondPageComponent },
