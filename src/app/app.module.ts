@@ -15,7 +15,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { HttpClientModule } from "@angular/common/http";
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import { RouterModule, Routes } from '@angular/router';
@@ -65,7 +64,6 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatTooltipModule,
-    HttpClientModule,
     FlexLayoutModule,
     RouterModule.forRoot(appRoutes)
   ],
