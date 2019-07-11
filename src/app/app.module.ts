@@ -14,8 +14,9 @@ import { MyTableComponent } from './my-table/my-table.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router';
 import { FirstPageComponent } from './first-page/first-page.component';
@@ -24,8 +25,8 @@ import { ThirdPageComponent } from './third-page/third-page.component';
 import { AccordionCVComponent } from './accordion-cv/accordion-cv.component';
 
 const appRoutes: Routes = [
-  { path: 'myWeb/', component: FirstPageComponent },
-  { path: 'myWeb', component: FirstPageComponent },
+  { path: '/', component: FirstPageComponent },
+  { path: '', component: FirstPageComponent },
   { path: 'first-page', component: FirstPageComponent },
   { path: 'second-page', component: SecondPageComponent },
   { path: 'third-page', component: ThirdPageComponent }
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
