@@ -96,15 +96,15 @@ export class AccordionCVComponent implements OnInit {
     this.matIconRegistry.addSvgIcon(
       'linkedin_icon',
       this.domSanitzer.bypassSecurityTrustResourceUrl('assets/icons/linkedin.svg')
-    )
+    );
     this.matIconRegistry.addSvgIcon(
       'telegram_icon',
       this.domSanitzer.bypassSecurityTrustResourceUrl('assets/icons/telegram.svg')
-    )
+    );
     this.matIconRegistry.addSvgIcon(
       'whatsapp_icon',
       this.domSanitzer.bypassSecurityTrustResourceUrl('assets/icons/whatsapp.svg')
-    )
+    );
    }
 
   ngOnInit() {
