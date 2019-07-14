@@ -28,14 +28,13 @@
 
 .image-in-grid {
   object-fit: cover;
-  width: 100%;
+  width: 80%;
   height: 100%;
   align-self: center;
 }
 
 .company-name {
   color: purple;
-  align-self: left;
 }
 
 mat-form-field {

@@ -97,10 +97,11 @@
     <ng-container *ngFor="let exp of experience">
       <div
         gdAreas="date title content company"
-        gdGap="10px"
+        gdGap="15px"
         gdRows="auto"
         gdCols="auto auto auto auto"
         gdAreas.lt-md="date | title | content | company"
+        fxLayoutAlign="space-between center"
         gdRows.lt-md="auto auto auto auto">
 
         <div gdArea="date">{{exp.getDate()}}</div>
@@ -137,8 +138,8 @@
         gdAreas="date title content company"
         gdGap="10px"
         gdRows="auto"
-        gdCols="auto auto auto auto"
-        fxLayoutAlign="left"
+        gdCols="auto auto auto"
+        fxLayoutAlign="space-between"
         gdAreas.lt-md="date | title | company"
         gdRows.lt-md="auto auto auto auto">
 
@@ -175,10 +176,10 @@
         gdAreas="date title content company"
         gdGap="10px"
         gdRows="auto"
-        gdCols="auto auto auto auto"
-        fxLayoutAlign="left"
+        gdCols="auto auto auto"
+        fxLayoutAlign="space-between"
         gdAreas.lt-md="date | title | company"
-        gdRows.lt-md="auto auto auto auto">
+        gdRows.lt-md="auto auto auto">
 
         <div gdArea="date">{{cer.getDate()}}</div>
         <div gdArea="title"><b>{{cer.getTitle()}}</b></div>
