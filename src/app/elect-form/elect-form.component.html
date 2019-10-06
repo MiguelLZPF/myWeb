@@ -1,0 +1,443 @@
+<mat-accordion multi="true" class="example-headers-align">
+	<mat-expansion-panel [expanded]=true>
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+        <mat-icon color="primary">wb_incandescent</mat-icon>
+        <div fxFlex="1 2 0"></div>
+				<b>Electricity</b>
+        <div fxFlex="1 2 0"></div>
+			</mat-panel-title>
+		</mat-expansion-panel-header>
+
+		<form [formGroup]="electForm"
+      gdAreas="powerPrice days power consumedPrice consumed"
+      gdRows="auto"
+      gdGap="20px"
+      gdAreas.lt-lg="powerPrice days | power power | consumedPrice consumed"
+      gdRows.lt-lg="auto auto"
+      gdAreas.lt-sm="powerPrice | days | power | consumedPrice | consumed"
+      gdRows.lt-sm="auto auto auto auto"
+    >
+      <mat-form-field appearance="outline" gdArea="powerPrice">
+        <mat-label>Power price</mat-label>
+        <input matInput type="number" step="0.01" min="0" max="10"
+          placeholder="[€/KW day]" formControlName="powerPrice" required>
+        <span matSuffix>[€/KW day]</span>
+        <mat-error *ngIf="electForm.get('powerPrice').invalid">{{getElectErrorMessage('powerPrice')}}</mat-error>
+        <mat-hint>Price for the fixed power</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" gdArea="days">
+        <mat-label>Days</mat-label>
+        <input matInput type="number" min="1" max="100"
+          formControlName="days" required>
+        <mat-error *ngIf="electForm.get('days').invalid">{{getElectErrorMessage('days')}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" gdArea="power">
+        <mat-label>Fixed Power</mat-label>
+				<input matInput type="number" step="1" min="1" max="50"
+          placeholder="[KW]" formControlName="power" required>
+        <span matSuffix>[KW]</span>
+        <mat-error *ngIf="electForm.get('power').invalid">{{getElectErrorMessage('power')}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" gdArea="consumedPrice">
+        <mat-label>Electricity Price</mat-label>
+        <input matInput type="number" step="0.01" min="0" max="10"
+          placeholder="[€/KWh]" formControlName="consumedPrice" required>
+        <span matSuffix>[€/KWh]</span>
+        <mat-error *ngIf="electForm.get('consumedPrice').invalid">{{getElectErrorMessage('consumedPrice')}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" gdArea="consumed">
+        <mat-label>Electricity Consumed</mat-label>
+        <input matInput type="number" step="10" min="0"
+          placeholder="[KWh]" formControlName="consumed" required>
+        <span matSuffix>[KWh]</span>
+        <mat-error *ngIf="electForm.get('consumed').invalid">{{getElectErrorMessage('consumed')}}</mat-error>
+      </mat-form-field>
+
+    </form>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]=true>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon color="primary">whatshot</mat-icon>
+        <div fxFlex="1 2 0"></div>
+				<b>Gas</b>
+        <div fxFlex="1 2 0"></div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+	  <form [formGroup]="gasForm"
+      gdAreas="fixedPrice days consumedPrice consumed"
+      gdRows="auto"
+      gdGap="20px"
+      gdAreas.lt-md="fixedPrice days | consumedPrice consumed"
+      gdRows.lt-md="auto auto"
+      gdAreas.lt-sm="fixedPrice | days | consumedPrice | consumed"
+      gdRows.lt-sm="auto auto auto auto"
+    >
+        <mat-form-field appearance="outline" gdArea="fixedPrice">
+          <mat-label>Fixed Price</mat-label>
+          <input matInput type="number" placeholder="[€/day]" formControlName="fixedPrice" required>
+          <span matSuffix>[€/day]</span>
+          <mat-error *ngIf="gasForm.get('fixedPrice').invalid"
+          >{{getGasErrorMessage('fixedPrice')}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" gdArea="days">
+          <mat-label>Days</mat-label>
+          <input matInput type="number" min="10" max="100" placeholder="Days" formControlName="days" required>
+          <mat-error *ngIf="gasForm.get('days').invalid">{{getGasErrorMessage('days')}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" gdArea="consumedPrice">
+          <mat-label>Gas Price</mat-label>
+          <input matInput type="number" placeholder="[€/KWh]" formControlName="consumedPrice" required>
+          <span matSuffix>[€/KWh]</span>
+          <mat-error *ngIf="gasForm.get('consumedPrice').invalid">{{getGasErrorMessage('consumedPrice')}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" gdArea="consumed">
+          <mat-label>Gas Consumed</mat-label>
+          <input matInput type="number" placeholder="[KWh]" formControlName="consumed" required>
+          <span matSuffix>[KWh]</span>
+          <mat-error *ngIf="gasForm.get('consumed').invalid">{{getGasErrorMessage('consumed')}}</mat-error>
+        </mat-form-field>
+	    </form>
+  </mat-expansion-panel>
+<!-- RESULT -->
+  <mat-expansion-panel [expanded]=true >
+    <mat-expansion-panel-header>
+      <mat-panel-title color="primary">
+        <mat-icon color="primary">euro_symbol</mat-icon>
+        <div fxFlex="1 2 0"></div>
+				<b>Results </b>
+        &nbsp;
+        <div class = "text-match" *ngIf="isInHistory && isInHistory != undefined"
+        >(Already in History [ID = {{duplId}}])</div>
+        <div fxFlex="1 2 0"></div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div
+      gdAreas="elect electVAT gas gasVAT"
+      gdRows="auto"
+      gdGap="16px"
+      gdAreas.lt-md="elect electVAT | gas gasVAT"
+      gdRows.lt-md="auto auto"
+      gdAreas.lt-sm="elect | electVAT | gas | gasVAT"
+      gdRows.lt-sm="auto auto auto auto"
+      >
+      <div gdArea="elect">
+        Electicity: {{bill.result.totalElect.toFixed(4)}} €
+      </div>
+      <div gdArea="electVAT">
+        Electicity (+VAT): {{bill.result.totalElectVAT.toFixed(4)}} €
+      </div>
+      <div gdArea="gas">
+        Gas: {{bill.result.totalGas.toFixed(4)}} €
+      </div>
+      <div gdArea="gasVAT">
+        Gas (+VAT): {{bill.result.totalGasVAT.toFixed(4)}} €
+      </div>
+    </div>
+    <br/>
+    <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
+    <br/>
+    <div
+      gdAreas="total totalVAT"
+      gdRows="auto"
+      gdGap="16px"
+      gdAreas.lt-sm="total | totalVAT"
+      gdRows.lt-sm="auto auto"
+      >
+      <div gdArea="total">
+        <b><font size="+1">Total: {{bill.result.total.toFixed(4)}} €</font></b>
+      </div>
+      <div gdArea="totalVAT">
+        <b><font size="+1">Total (+VAT): {{bill.result.totalVAT.toFixed(4)}} €</font></b>
+      </div>
+    </div>
+    <br/>
+    <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
+    <br/>
+    <!-- TAXES And GROUP form -->
+    <div
+      gdAreas="taxes group"
+      gdRows="auto"
+      gdGap="16px"
+      gdAreas.lt-sm="taxes group"
+      gdRows.lt-sm="auto auto"
+      >
+      <mat-form-field class="mat-form-taxes"
+                      gdArea="taxes"
+                      appearance="outline"
+                      matTooltip="Adapt taxes for your case/country"
+                      matTooltipPosition="below"
+                      matTooltipShowDelay="1000"
+                      matTooltipHideDelay="1500"
+                      >
+          <mat-label>Taxes (VAT)</mat-label>
+          <input matInput [formControl]="taxes" placeholder=" -- 21% -- " required/>
+          <span matSuffix>%</span>
+          <mat-error *ngIf="taxes.invalid"
+          >{{getTaxesErrorMessages()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-group"
+                      gdArea="group"
+                      appearance="outline"
+                      >
+          <mat-label>Group</mat-label>
+          <input matInput
+                 [formControl]="group"
+                 placeholder=" -- ExampleGroupName -- "
+                 ng-blur="getHistory(group.value, false)"
+          />
+          <mat-hint>Use a group to retreive the history. Warning: case insensitive</mat-hint>
+      </mat-form-field>
+    </div>
+    <mat-action-row>
+      <button mat-raised-button
+              color="warn"
+              (click)="clearForm()"
+              fxHide.lt-sm="true"
+              fxHide="false"
+              matTooltip="Clear the form completly"
+              matTooltipPosition="below"
+              matTooltipShowDelay="1000"
+              matTooltipHideDelay="1500"
+              > Clear Form </button>
+      <button mat-fab
+              color="warn"
+              (click)="clearForm()"
+              fxHide.lt-sm="false"
+              fxHide="true"
+              matTooltip="Clear the form completly"
+              matTooltipPosition="below"
+              matTooltipShowDelay="1000"
+              matTooltipHideDelay="1500"
+              >
+        <mat-icon>clear</mat-icon>
+      </button>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      <button mat-raised-button
+              color="accent"
+              (click)="resetFormToDefault()"
+              fxHide.lt-sm="true"
+              fxHide="false"
+              matTooltip="Reset the form to the default values"
+              matTooltipPosition="below"
+              matTooltipShowDelay="1000"
+              matTooltipHideDelay="1500"
+              >Reset Form</button>
+      <button mat-fab
+              (click)="resetFormToDefault()"
+              fxHide.lt-sm="false"
+              fxHide="true"
+              matTooltip="Reset the form to the default values"
+              matTooltipPosition="below"
+              matTooltipShowDelay="1000"
+              matTooltipHideDelay="1500"
+              >
+        <mat-icon>refresh</mat-icon>
+      </button>
+
+      <div fxFlex="1 2 auto"></div>
+      &nbsp;
+      &nbsp;
+      <button mat-raised-button color="primary" (click)="calculateBill()"
+        fxHide.lt-sm="true" fxHide="false"> Calculate </button>
+      <button mat-fab color="primary" (click)="calculateBill()" fxHide.lt-sm="false" fxHide="true">
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-action-row>
+  </mat-expansion-panel>
+<!-- HISTORY -->
+  <mat-expansion-panel *ngIf='group.value != undefined && group.value != ""' (opened)="getHistory(group.value, false)">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon color="primary">history</mat-icon>
+        <div fxFlex="1 2 auto"></div>
+				<b>History ({{group.value}})</b>
+        <div fxFlex="1 2 auto"></div>
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+    <font color="red" *ngIf="history == undefined || history.length <= 0"><b>No records for the Group: {{group.value}}</b></font>
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let record of history; let i = index" [attr.data-index]="i"
+          MatAccordionDisplayMode="flat"
+          [expanded]=false
+          (opened)="'panelOpenState'+i = false"
+          (closed)="'panelOpenState'+i = true"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <b>{{record.timeStamp.replace('T',' ').replace('.000Z', '')}}</b>
+              <div fxFlex="1 2 auto"></div>
+              <div [ngClass]="{'text-match': record.id == bill.id}"
+              >{{record.result.totalVAT}} €</div>
+              <div fxFlex="1 2 auto"></div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-divider></mat-divider>
+          <mat-divider></mat-divider>
+          <br/>
+          <b>Electricity</b>
+          <div
+            gdAreas="powerPrice days power consumedPrice consumed"
+            gdRows="auto"
+            gdGap="20px"
+            gdAreas.lt-lg="powerPrice days | power power | consumedPrice consumed"
+            gdRows.lt-lg="auto auto"
+            gdAreas.lt-sm="powerPrice | days | power | consumedPrice | consumed"
+            gdRows.lt-sm="auto auto auto auto"
+            >
+            <div gdArea="powerPrice">
+              Power price: {{record.electData.powerPrice}} [€/KW day]
+            </div>
+            <div gdArea="days">
+              Days: {{record.electData.days}}
+            </div>
+            <div gdArea="power">
+              Power: {{record.electData.power}} [KW]
+            </div>
+            <div gdArea="consumedPrice">
+              Consumed price: {{record.electData.consumedPrice}} [€/KWh]
+            </div>
+            <div gdArea="consumed">
+              Consumed: {{record.electData.consumed}} [KWh]
+            </div>
+          </div>
+          <br/>
+          <b>Gas</b>
+          <br/>
+          <div
+            gdAreas="fixedPrice days consumedPrice consumed"
+            gdRows="auto"
+            gdGap="20px"
+            gdAreas.lt-md="fixedPrice days | consumedPrice consumed"
+            gdRows.lt-md="auto auto"
+            gdAreas.lt-sm="fixedPrice | days | consumedPrice | consumed"
+            gdRows.lt-sm="auto auto auto auto"
+            >
+            <div gdArea="fixedPrice">
+              Fixed price: {{record.gasData.fixedPrice}} [€/day]
+            </div>
+            <div gdArea="days">
+              Days: {{record.gasData.days}}
+            </div>
+            <div gdArea="consumedPrice">
+              Consumed Price: {{record.gasData.consumedPrice}} [€/KWh]
+            </div>
+            <div gdArea="consumed">
+              Consumed: {{record.gasData.consumed}} [KWh]
+            </div>
+          </div>
+          <br/>
+          <mat-divider></mat-divider>
+          <mat-divider></mat-divider>
+          <br/>
+          <div
+            gdAreas="elect electVAT gas gasVAT"
+            gdRows="auto"
+            gdGap="16px"
+            gdAreas.lt-md="elect electVAT | gas gasVAT"
+            gdRows.lt-md="auto auto"
+            gdAreas.lt-sm="elect | electVAT | gas | gasVAT"
+            gdRows.lt-sm="auto auto auto auto"
+            >
+            <div gdArea="elect">
+              Electicity: {{record.result.totalElect.toFixed(4)}} €
+            </div>
+            <div gdArea="electVAT">
+              Electicity (+{{record.taxes}}%): {{record.result.totalElectVAT.toFixed(4)}} €
+            </div>
+            <div gdArea="gas">
+              Gas: {{record.result.totalGas.toFixed(4)}} €
+            </div>
+            <div gdArea="gasVAT">
+              Gas (+{{record.taxes}}%): {{record.result.totalGasVAT.toFixed(4)}} €
+            </div>
+          </div>
+          <br/>
+          <mat-divider></mat-divider>
+          <mat-divider></mat-divider>
+          <br/>
+          <div
+            gdAreas="total totalVAT"
+            gdRows="auto"
+            gdGap="16px"
+            gdAreas.lt-sm="total | totalVAT"
+            gdRows.lt-sm="auto auto"
+            >
+            <div gdArea="total">
+              <b><font size="+1">Total: {{record.result.total.toFixed(4)}} €</font></b>
+            </div>
+            <div gdArea="totalVAT">
+              <b><font size="+1">Total (+{{record.taxes}}%): {{record.result.totalVAT.toFixed(4)}} €</font></b>
+            </div>
+          </div>
+          <mat-action-row>
+            <button mat-raised-button
+                    color="warn"
+                    fxHide.lt-sm="true"
+                    matTooltip="Completly remove record from history forever"
+                    matTooltipPosition="below"
+                    matTooltipShowDelay="1000"
+                    matTooltipHideDelay="1500"
+                    (click)="openDelDialog(record.id)"
+                    >
+              Delete from History
+            </button>
+            <button mat-fab
+                    color="warn"
+                    fxHide.lt-sm="false"
+                    fxHide="true"
+                    matTooltip="Completly remove record from history forever"
+                    matTooltipPosition="below"
+                    matTooltipShowDelay="1000"
+                    matTooltipHideDelay="1500"
+                    (click)="openDelDialog(record.id)"
+                    >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <div fxFlex="1 2 auto"></div>
+            &nbsp;
+            &nbsp;
+            <button mat-raised-button
+                    color="primary"
+                    fxHide.lt-sm="true"
+                    matTooltip="Use the data from this record in the current form"
+                    matTooltipPosition="below"
+                    matTooltipShowDelay="1000"
+                    matTooltipHideDelay="1500"
+                    (click)="dataFromJsonToForm(record)"
+                    >
+              Use this data
+            </button>
+            <button mat-fab
+                    color="primary"
+                    fxHide.lt-sm="false"
+                    fxHide="true"
+                    matTooltip="Use the data from this record in the current form"
+                    matTooltipPosition="below"
+                    matTooltipShowDelay="1000"
+                    matTooltipHideDelay="1500"
+                    (click)="dataFromJsonToForm(record)"
+                    >
+              <mat-icon>arrow_upward</mat-icon>
+            </button>
+          </mat-action-row>
+        </mat-expansion-panel>
+    </mat-accordion>
+  </mat-expansion-panel>
+
+</mat-accordion>

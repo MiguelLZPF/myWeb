@@ -1,0 +1,19 @@
+mat-form-field {
+  min-width: 190px;
+}
+.mat-form-taxes {
+  min-width: 70px;
+  max-width: 100px;
+}
+.mat-form-group {
+  min-width: 80px;
+}
+.text-match {
+  color: red;
+  font-weight: bold;
+}
+/*input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}*/

@@ -17,18 +17,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule, Routes } from '@angular/router';
 import { FirstPageComponent } from './first-page/first-page.component';
 import { SecondPageComponent } from './second-page/second-page.component';
 import { ThirdPageComponent } from './third-page/third-page.component';
 import { AccordionCVComponent } from './accordion-cv/accordion-cv.component';
+import { ElectFormComponent } from './elect-form/elect-form.component';
 
 const appRoutes: Routes = [
   { path: '', component: FirstPageComponent },
   { path: 'first-page', component: FirstPageComponent },
   { path: 'second-page', component: SecondPageComponent },
-  { path: 'third-page', component: ThirdPageComponent }
+  { path: 'third-page', component: ThirdPageComponent },
+  { path: 'elect-form', component: ElectFormComponent}
 ];
 
 @NgModule({
@@ -40,7 +43,8 @@ const appRoutes: Routes = [
     FirstPageComponent,
     SecondPageComponent,
     ThirdPageComponent,
-    AccordionCVComponent
+    AccordionCVComponent,
+    ElectFormComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +70,7 @@ const appRoutes: Routes = [
     MatInputModule,
     MatTooltipModule,
     FlexLayoutModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
