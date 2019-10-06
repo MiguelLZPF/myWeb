@@ -24,7 +24,7 @@ import { FirstPageComponent } from './first-page/first-page.component';
 import { SecondPageComponent } from './second-page/second-page.component';
 import { ThirdPageComponent } from './third-page/third-page.component';
 import { AccordionCVComponent } from './accordion-cv/accordion-cv.component';
-import { ElectFormComponent } from './elect-form/elect-form.component';
+import { ElectFormComponent, DeleteBillInHistoryDialog } from './elect-form/elect-form.component';
 
 const appRoutes: Routes = [
   { path: '', component: FirstPageComponent },
@@ -44,7 +44,8 @@ const appRoutes: Routes = [
     SecondPageComponent,
     ThirdPageComponent,
     AccordionCVComponent,
-    ElectFormComponent
+    ElectFormComponent,
+    DeleteBillInHistoryDialog
   ],
   imports: [
     BrowserModule,
